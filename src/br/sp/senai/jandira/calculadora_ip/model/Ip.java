@@ -72,7 +72,7 @@ public class Ip {
 		return primeiroOcteto + "." + segundoOcteto + "." + terceiroOcteto + "." + quartoOcteto;
 	}
 	
-	public static String identificarClasse(int primeiroOcteto) {
+	public String identificarClasse(int primeiroOcteto) {
 		if (primeiroOcteto >= 0 && primeiroOcteto <= 127) {
 			return "Classe A";
 		} else if (primeiroOcteto >= 128 && primeiroOcteto <= 191) {
@@ -85,11 +85,11 @@ public class Ip {
 		
 	}
 	
-	public static int calcularHosts(int cidr) {
+	public int calcularHosts(int cidr) {
         return (int) Math.pow(2, 32 - cidr) - 2;
     }
 	
-	public static String mascaraDecimal(String classe) {
+	public String mascaraDecimal(String classe) {
         switch (classe) {
             case "Classe A": return "255.0.0.0";
             case "Classe B": return "255.255.0.0";
@@ -98,7 +98,7 @@ public class Ip {
         }
     }
 
-	public static String mascaraBinaria(String classe) {
+	public String mascaraBinaria(String classe) {
         switch (classe) {
             case "Classe A": return "11111111.00000000.00000000.00000000";
             case "Classe B": return "11111111.11111111.00000000.00000000";

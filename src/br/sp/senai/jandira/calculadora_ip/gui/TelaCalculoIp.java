@@ -17,22 +17,39 @@ public class TelaCalculoIp {
 
 	private JLabel lblEnderecoIp;
 	private JLabel lblCidr;
+	
+	private JLabel lblIps;
+	private JLabel lblClasse;
+	private JLabel lblMascDecimal;
+	private JLabel lblMascBinaria;
+	private JLabel lblRedes;
+	
 	private JLabel lblResultadoIp;
 	private JLabel lblResultadoClasse;
 	private JLabel lblResultadoMascDec;
 	private JLabel lblResultadoMascBin;
 	private JLabel lblHosts;
 	private JLabel lblMsgErro;
+	
+	
 	private JPanel painelOctetos;
+	private JPanel painelInfos;
+	private JPanel painelResult;
+	
 	private JTextField txtPrimeiroOcteto;
 	private JTextField txtSegundoOcteto;
 	private JTextField txtTerceiroOcteto;
 	private JTextField txtQuartoOcteto;
 	private JTextField txtCidr;
+	
 	private JButton btnCalcular;
 	private JButton btnLimpar;
 
-	public void criarTela() {
+	public TelaCalculoIp() {
+		criarTela();
+	}
+	
+	private void criarTela() {
 		JFrame tela = new JFrame();
 		tela.setSize(500, 405);
 		tela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -92,11 +109,11 @@ public class TelaCalculoIp {
 					calculadora.setQuartoOcteto(quartoOcteto);
 					calculadora.setCidr(cidr);
 					
-//					lblResultadoIp.setText(calculadora.getIp());
-//					lblResultadoClasse.setText(calculadora.identificarClasse(primeiroOcteto));
-//					lblResultadoMascDec.setText(calculadora.getMascaraDecimal());
-//					lblResultadoMascBin.setText(calculadora.getMascaraBinario());
-//					lblHosts.setText(String.valueOf(calculadora.calcularHosts(cidr)));
+					lblResultadoIp.setText(calculadora.getIp());
+					lblResultadoClasse.setText(String.valueOf(calculadora.identificarClasse(primeiroOcteto)));
+					lblResultadoMascDec.setText(calculadora.getMascaraDecimal());
+					lblResultadoMascBin.setText(calculadora.getMascaraBinario());
+					lblHosts.setText(String.valueOf(calculadora.calcularHosts(cidr)));
 					
 				} catch (Exception e2) {
 					lblMsgErro.setText("Insira um valor válido!");
@@ -115,14 +132,62 @@ public class TelaCalculoIp {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				try {
-					
-				} catch (Exception e2) {
-					
-				}
+				txtPrimeiroOcteto.setText("");
+				txtSegundoOcteto.setText("");
+				txtTerceiroOcteto.setText("");
+				txtQuartoOcteto.setText("");
+				txtCidr.setText("");
 				
+				lblResultadoIp.setText("");
+				lblResultadoClasse.setText("");
+				lblResultadoMascDec.setText("");
+				lblResultadoMascBin.setText("");
+				lblHosts.setText("");
+				
+				lblMsgErro.setText("");
 			}
 		});
+		
+		// Painel de informações
+		painelInfos = new JPanel(new GridLayout(6, 1, 0, 0));
+		painelInfos.setBounds(37, 160, 200, 138);
+		
+		lblIps = new JLabel();
+		lblIps.setText("IP: ");
+		
+		lblClasse = new JLabel();
+		lblClasse.setText("Classe: ");
+		
+		lblMascDecimal = new JLabel();
+		lblMascDecimal.setText("Másc. Decimal: ");
+		
+		lblMascBinaria = new JLabel();
+		lblMascBinaria.setText("Másc. Binária: ");
+		
+		lblRedes = new JLabel();
+		lblRedes.setText("Número de hosts: ");
+		
+		painelInfos.add(lblIps);
+		painelInfos.add(lblClasse);
+		painelInfos.add(lblMascDecimal);
+		painelInfos.add(lblMascBinaria);
+		painelInfos.add(lblRedes);
+		
+		// Painel de resultados
+		painelResult = new JPanel(new GridLayout(6, 1, 0, 0));
+		painelResult.setBounds(160, 160, 287, 138);
+		
+		lblEnderecoIp = new JLabel();
+		lblResultadoClasse = new JLabel();
+		lblResultadoMascDec = new JLabel();
+		lblResultadoMascBin = new JLabel();
+		lblHosts = new JLabel();
+		
+		painelResult.add(lblEnderecoIp);
+		painelResult.add(lblResultadoClasse);
+		painelResult.add(lblResultadoMascDec);
+		painelResult.add(lblResultadoMascBin);
+		painelResult.add(lblHosts);
 		
 		// Mostrar na tela
 		tela.getContentPane().add(lblEnderecoIp);
@@ -131,8 +196,9 @@ public class TelaCalculoIp {
 		tela.getContentPane().add(txtCidr);
 		tela.getContentPane().add(btnCalcular);
 		tela.getContentPane().add(btnLimpar);
-		
-		
+		tela.getContentPane().add(painelInfos);
+		tela.getContentPane().add(painelResult);
+		tela.getContentPane().add(lblMsgErro);
 		
 		// Tornar tela visivel
 		tela.setVisible(true);

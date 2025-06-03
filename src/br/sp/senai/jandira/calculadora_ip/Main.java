@@ -6,11 +6,8 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		TelaCalculoIp tela = new TelaCalculoIp();
-		tela.criarTela();
+		new TelaCalculoIp();
 		
-
-
 	}
 
 }
