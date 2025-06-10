@@ -28,4 +28,7 @@ Exibição dos resultados detalhados em painéis organizados.
 
 Interface simples, limpa e responsiva com GridLayout e posicionamento absoluto.
 
+#Autor
+Pedro Henrique
+
 ![](image/preview.png)
