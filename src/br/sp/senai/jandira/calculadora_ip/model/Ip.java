@@ -8,7 +8,6 @@ public class Ip {
 	private int quartoOcteto;
 	private int cidr;
 
-	// Getters e Setters com validações
 	public int getPrimeiroOcteto() {
 		return primeiroOcteto;
 	}
@@ -69,7 +68,6 @@ public class Ip {
 		}
 	}
 
-	// Métodos utilitários
 
 	public String getIp() {
 		return primeiroOcteto + "." + segundoOcteto + "." + terceiroOcteto + "." + quartoOcteto + "/" + cidr;
@@ -89,7 +87,7 @@ public class Ip {
 
 	public int calcularHosts() {
 		if (cidr >= 31) {
-			return (int) Math.pow(2, 32 - cidr); // /31 ou /32 são válidos em ponto-a-ponto
+			return (int) Math.pow(2, 32 - cidr);
 		} else {
 			return (int) Math.pow(2, 32 - cidr) - 2;
 		}
@@ -121,8 +119,6 @@ public class Ip {
 		}
 	}
 
-	// NOVOS MÉTODOS
-
 	private int ipParaInt() {
 		return (primeiroOcteto << 24) | (segundoOcteto << 16) | (terceiroOcteto << 8) | quartoOcteto;
 	}
@@ -136,7 +132,7 @@ public class Ip {
 	}
 
 	public String getPrimeiroIpValido() {
-		if (cidr == 32) return getIp().split("/")[0]; // apenas um host
+		if (cidr == 32) return getIp().split("/")[0];
 		int ipDecimal = ipParaInt();
 		int mask = -1 << (32 - cidr);
 		int network = ipDecimal & mask;
@@ -144,7 +140,7 @@ public class Ip {
 	}
 
 	public String getUltimoIpValido() {
-		if (cidr == 32) return getIp().split("/")[0]; // apenas um host
+		if (cidr == 32) return getIp().split("/")[0];
 		int ipDecimal = ipParaInt();
 		int mask = -1 << (32 - cidr);
 		int broadcast = (ipDecimal & mask) | ~mask;
