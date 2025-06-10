@@ -23,12 +23,18 @@ public class TelaCalculoIp {
 	private JLabel lblMascDecimal;
 	private JLabel lblMascBinaria;
 	private JLabel lblRedes;
+	private JLabel lblPrimeiroIpValido;
+	private JLabel lblUltimoIpValido;
+	private JLabel lblBroadcast;
 	
 	private JLabel lblResultadoIp;
 	private JLabel lblResultadoClasse;
 	private JLabel lblResultadoMascDec;
 	private JLabel lblResultadoMascBin;
 	private JLabel lblHosts;
+	private JLabel lblResultadoPrimeiroIpValido;
+	private JLabel lblResultadoUltimoIpValido;
+	private JLabel lblResultadoBroadcast;
 	private JLabel lblMsgErro;
 	
 	private JPanel painelOctetos;
@@ -44,13 +50,9 @@ public class TelaCalculoIp {
 	private JButton btnCalcular;
 	private JButton btnLimpar;
 
-//	public TelaCalculoIp() {
-//		criarTela();
-//	}
-	
 	public void criarTela() {
 		JFrame tela = new JFrame("Calculadora de IP");
-		tela.setSize(500, 405);
+		tela.setSize(500, 500);
 		tela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		tela.setLayout(null);
 		tela.setResizable(false);
@@ -61,7 +63,6 @@ public class TelaCalculoIp {
 		lblEnderecoIp.setBounds(37, 20, 220, 35);
 		lblEnderecoIp.setFont(new Font("Arial", Font.BOLD, 15));
 		
-		// Painel octetos
 		painelOctetos = new JPanel(new GridLayout(1, 4, 5, 0));
 		painelOctetos.setBounds(37, 60, 280, 30);
 		
@@ -75,7 +76,6 @@ public class TelaCalculoIp {
 		painelOctetos.add(txtTerceiroOcteto);
 		painelOctetos.add(txtQuartoOcteto);
 		
-		// Cidr
 		lblCidr = new JLabel();
 		lblCidr.setText("Cidr");
 		lblCidr.setBounds(380, 20, 100, 35);
@@ -84,13 +84,11 @@ public class TelaCalculoIp {
 		txtCidr = new JTextField();
 		txtCidr.setBounds(380, 60, 66, 30);
 		
-		// Botão calcular
 		btnCalcular = new JButton();
 		btnCalcular.setText("Calcular");
 		btnCalcular.setBounds(37, 105, 200, 35);
 		btnCalcular.setFont(new Font("Arial", Font.BOLD, 15));
 		btnCalcular.addActionListener(new ActionListener() {
-			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -108,26 +106,24 @@ public class TelaCalculoIp {
 					calculadora.setCidr(cidr);
 					
 					lblResultadoIp.setText(calculadora.getIp());
-					lblResultadoClasse.setText(String.valueOf(calculadora.identificarClasse(primeiroOcteto)));
-					lblResultadoMascDec.setText(calculadora.mascaraDecimal(null));
-					lblResultadoMascBin.setText(calculadora.mascaraBinaria(null));
+					lblResultadoClasse.setText(calculadora.identificarClasse());
+					lblResultadoMascDec.setText(calculadora.mascaraDecimal());
+					lblResultadoMascBin.setText(calculadora.mascaraBinaria());
 					lblHosts.setText(String.valueOf(calculadora.calcularHosts()));
-					
+					lblResultadoPrimeiroIpValido.setText(calculadora.getPrimeiroIpValido());
+					lblResultadoUltimoIpValido.setText(calculadora.getUltimoIpValido());
+					lblResultadoBroadcast.setText(calculadora.getBroadcast());
 				} catch (Exception e2) {
 					lblMsgErro.setText("Insira um valor válido!");
-					
 				}
-				
 			}
 		});
 		
-		// Botão limpar
 		btnLimpar = new JButton();
 		btnLimpar.setText("Limpar");
 		btnLimpar.setBounds(246, 105, 200, 35);
 		btnLimpar.setFont(new Font("Arial", Font.BOLD, 15));
 		btnLimpar.addActionListener(new ActionListener() {
-			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				txtPrimeiroOcteto.setText("");
@@ -141,53 +137,57 @@ public class TelaCalculoIp {
 				lblResultadoMascDec.setText("");
 				lblResultadoMascBin.setText("");
 				lblHosts.setText("");
-				
+				lblResultadoPrimeiroIpValido.setText("");
+				lblResultadoUltimoIpValido.setText("");
+				lblResultadoBroadcast.setText("");
 				lblMsgErro.setText("");
 			}
 		});
 		
-		// Painel de informações
-		painelInfos = new JPanel(new GridLayout(6, 1, 0, 0));
-		painelInfos.setBounds(37, 160, 200, 138);
+		painelInfos = new JPanel(new GridLayout(9, 1, 0, 0));
+		painelInfos.setBounds(37, 160, 200, 225);
 		
-		lblIps = new JLabel();
-		lblIps.setText("IP: ");
-		
-		lblClasse = new JLabel();
-		lblClasse.setText("Classe: ");
-		
-		lblMascDecimal = new JLabel();
-		lblMascDecimal.setText("Másc. Decimal: ");
-		
-		lblMascBinaria = new JLabel();
-		lblMascBinaria.setText("Másc. Binária: ");
-		
-		lblRedes = new JLabel();
-		lblRedes.setText("Número de hosts: ");
+		lblIps = new JLabel("IP: ");
+		lblClasse = new JLabel("Classe: ");
+		lblMascDecimal = new JLabel("Másc. Decimal: ");
+		lblMascBinaria = new JLabel("Másc. Binária: ");
+		lblRedes = new JLabel("Número de hosts: ");
+		lblPrimeiroIpValido = new JLabel("Primeiro IP válido: ");
+		lblUltimoIpValido = new JLabel("Último IP válido: ");
+		lblBroadcast = new JLabel("Broadcast: ");
 		
 		painelInfos.add(lblIps);
 		painelInfos.add(lblClasse);
 		painelInfos.add(lblMascDecimal);
 		painelInfos.add(lblMascBinaria);
 		painelInfos.add(lblRedes);
+		painelInfos.add(lblPrimeiroIpValido);
+		painelInfos.add(lblUltimoIpValido);
+		painelInfos.add(lblBroadcast);
 		
-		// Painel de resultados
-		painelResult = new JPanel(new GridLayout(6, 1, 0, 0));
-		painelResult.setBounds(160, 160, 287, 138);
+		painelResult = new JPanel(new GridLayout(9, 1, 0, 0));
+		painelResult.setBounds(160, 160, 287, 225);
 		
 		lblResultadoIp = new JLabel();
 		lblResultadoClasse = new JLabel();
 		lblResultadoMascDec = new JLabel();
 		lblResultadoMascBin = new JLabel();
 		lblHosts = new JLabel();
+		lblResultadoPrimeiroIpValido = new JLabel();
+		lblResultadoUltimoIpValido = new JLabel();
+		lblResultadoBroadcast = new JLabel();
+		lblMsgErro = new JLabel();
 		
 		painelResult.add(lblResultadoIp);
 		painelResult.add(lblResultadoClasse);
 		painelResult.add(lblResultadoMascDec);
 		painelResult.add(lblResultadoMascBin);
 		painelResult.add(lblHosts);
+		painelResult.add(lblResultadoPrimeiroIpValido);
+		painelResult.add(lblResultadoUltimoIpValido);
+		painelResult.add(lblResultadoBroadcast);
+		painelResult.add(lblMsgErro);
 		
-		// Mostrar na tela
 		tela.getContentPane().add(lblEnderecoIp);
 		tela.getContentPane().add(painelOctetos);
 		tela.getContentPane().add(lblCidr);
@@ -196,9 +196,6 @@ public class TelaCalculoIp {
 		tela.getContentPane().add(btnLimpar);
 		tela.getContentPane().add(painelInfos);
 		tela.getContentPane().add(painelResult);
-		
-		// Tornar tela visivel
 		tela.setVisible(true);
 	}
-
 }
