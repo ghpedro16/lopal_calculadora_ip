@@ -7,10 +7,6 @@ public class Ip {
 	private int terceiroOcteto;
 	private int quartoOcteto;
 	private int cidr;
-	private int hosts;
-	private String mascaraDecimal;
-	private String mascaraBinario;
-	private String classe;
 	
 	public int getPrimeiroOcteto() {
 		return primeiroOcteto;
@@ -51,25 +47,9 @@ public class Ip {
 	public void setCidr(int cidr) {
 		this.cidr = cidr;
 	}
-	
-	public int getHosts() {
-		return hosts;
-	}
-
-	public String getMascaraDecimal() {
-		return mascaraDecimal;
-	}
-
-	public String getMascaraBinario() {
-		return mascaraBinario;
-	}
-
-	public String getClasse() {
-		return classe;
-	}
 
 	public String getIp() {
-		return primeiroOcteto + "." + segundoOcteto + "." + terceiroOcteto + "." + quartoOcteto;
+		return primeiroOcteto + "." + segundoOcteto + "." + terceiroOcteto + "." + quartoOcteto + "/" + cidr;
 	}
 	
 	public String identificarClasse(int primeiroOcteto) {
@@ -85,8 +65,12 @@ public class Ip {
 		
 	}
 	
-	public int calcularHosts(int cidr) {
-        return (int) Math.pow(2, 32 - cidr) - 2;
+	public int calcularHosts() {
+		if (cidr >= 32) {
+			return 1;
+		} else {
+			return (int) Math.pow(2, 32 - cidr) - 2;
+		}
     }
 	
 	public String mascaraDecimal(String classe) {
@@ -106,16 +90,5 @@ public class Ip {
             default: return "Fora do Range";
         }
     }
-	
-	public void mostrarDados() {
-		System.out.println("Mascara decimal: "  + mascaraDecimal);
-		System.out.println("Mascara binario: " + mascaraBinario);
-		System.out.println("Classe da Mascara: " + identificarClasse(primeiroOcteto));
-		System.out.println("Hosts disponiveis: " + calcularHosts(cidr));
-		System.out.println();
-		System.out.println();
-		
-	}
-	
 	
 }

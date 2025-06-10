@@ -31,7 +31,6 @@ public class TelaCalculoIp {
 	private JLabel lblHosts;
 	private JLabel lblMsgErro;
 	
-	
 	private JPanel painelOctetos;
 	private JPanel painelInfos;
 	private JPanel painelResult;
@@ -45,15 +44,14 @@ public class TelaCalculoIp {
 	private JButton btnCalcular;
 	private JButton btnLimpar;
 
-	public TelaCalculoIp() {
-		criarTela();
-	}
+//	public TelaCalculoIp() {
+//		criarTela();
+//	}
 	
-	private void criarTela() {
-		JFrame tela = new JFrame();
+	public void criarTela() {
+		JFrame tela = new JFrame("Calculadora de IP");
 		tela.setSize(500, 405);
 		tela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		tela.setTitle("Calculadora de IP");
 		tela.setLayout(null);
 		tela.setResizable(false);
 		tela.setLocationRelativeTo(null);
@@ -111,9 +109,9 @@ public class TelaCalculoIp {
 					
 					lblResultadoIp.setText(calculadora.getIp());
 					lblResultadoClasse.setText(String.valueOf(calculadora.identificarClasse(primeiroOcteto)));
-					lblResultadoMascDec.setText(calculadora.getMascaraDecimal());
-					lblResultadoMascBin.setText(calculadora.getMascaraBinario());
-					lblHosts.setText(String.valueOf(calculadora.calcularHosts(cidr)));
+					lblResultadoMascDec.setText(calculadora.mascaraDecimal(null));
+					lblResultadoMascBin.setText(calculadora.mascaraBinaria(null));
+					lblHosts.setText(String.valueOf(calculadora.calcularHosts()));
 					
 				} catch (Exception e2) {
 					lblMsgErro.setText("Insira um valor válido!");
@@ -177,13 +175,13 @@ public class TelaCalculoIp {
 		painelResult = new JPanel(new GridLayout(6, 1, 0, 0));
 		painelResult.setBounds(160, 160, 287, 138);
 		
-		lblEnderecoIp = new JLabel();
+		lblResultadoIp = new JLabel();
 		lblResultadoClasse = new JLabel();
 		lblResultadoMascDec = new JLabel();
 		lblResultadoMascBin = new JLabel();
 		lblHosts = new JLabel();
 		
-		painelResult.add(lblEnderecoIp);
+		painelResult.add(lblResultadoIp);
 		painelResult.add(lblResultadoClasse);
 		painelResult.add(lblResultadoMascDec);
 		painelResult.add(lblResultadoMascBin);
@@ -198,7 +196,6 @@ public class TelaCalculoIp {
 		tela.getContentPane().add(btnLimpar);
 		tela.getContentPane().add(painelInfos);
 		tela.getContentPane().add(painelResult);
-		tela.getContentPane().add(lblMsgErro);
 		
 		// Tornar tela visivel
 		tela.setVisible(true);
